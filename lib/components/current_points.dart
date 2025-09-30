@@ -3,7 +3,7 @@ import 'package:estilizacao_componentes/themes/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class AccountPoints extends StatefulWidget {
-  const AccountPoints({Key? key}) : super(key: key);
+  const AccountPoints({super.key});
 
   @override
   State<AccountPoints> createState() => _AccountPointsState();
@@ -35,7 +35,8 @@ class _AccountPointsState extends State<AccountPoints> {
             child: Container(
               height: 1,
               decoration: BoxDecoration(
-                  border: Border.all(color: ThemeColors.division)),
+                border: Border.all(color: ThemeColors.division),
+              ),
             ),
           ),
           Padding(

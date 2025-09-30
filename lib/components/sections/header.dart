@@ -3,7 +3,7 @@ import 'package:estilizacao_componentes/data/bank_inherited.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatefulWidget {
-  const Header({Key? key}) : super(key: key);
+  const Header({super.key});
 
   @override
   State<Header> createState() => _HeaderState();
@@ -19,7 +19,9 @@ class _HeaderState extends State<Header> {
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+            bottomLeft: Radius.circular(8),
+            bottomRight: Radius.circular(8),
+          ),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -47,11 +49,12 @@ class _HeaderState extends State<Header> {
                           text: '\$',
                           children: <TextSpan>[
                             TextSpan(
-                                text: BankInherited.of(context)
-                                    .values
-                                    .available
-                                    .toString(),
-                                style: Theme.of(context).textTheme.bodyLarge)
+                              text:
+                                  BankInherited.of(
+                                    context,
+                                  ).values.available.toString(),
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                           ],
                         ),
                       ),
@@ -59,41 +62,42 @@ class _HeaderState extends State<Header> {
                     ],
                   ),
                   FutureBuilder(
-                      future: BankHttp().dolarToReal(),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                            return CircularProgressIndicator();
-                            break;
-                          case ConnectionState.waiting:
-                            return CircularProgressIndicator();
-                            break;
-                          case ConnectionState.active:
-                            // TODO: Handle this case.
-                            break;
-                          case ConnectionState.done:
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text.rich(
-                                  TextSpan(
-                                    text: 'R\$',
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: snapshot.data.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge)
-                                    ],
-                                  ),
+                    future: BankHttp().dolarToReal(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return CircularProgressIndicator();
+                          break;
+                        case ConnectionState.waiting:
+                          return CircularProgressIndicator();
+                          break;
+                        case ConnectionState.active:
+                          // TODO: Handle this case.
+                          break;
+                        case ConnectionState.done:
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text.rich(
+                                TextSpan(
+                                  text: 'R\$',
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: snapshot.data.toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                                  ],
                                 ),
-                                const Text('Dolar to Real'),
-                              ],
-                            );
-                            break;
-                        }
-                        return Text('Erro na API');
-                      }),
+                              ),
+                              const Text('Dolar to Real'),
+                            ],
+                          );
+                          break;
+                      }
+                      return Text('Erro na API');
+                    },
+                  ),
                 ],
               ),
             ],

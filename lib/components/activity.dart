@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Activity extends StatelessWidget {
   final Icon mainIcon;
   final String cardTitle;
-  const Activity({Key? key, required this.mainIcon, required this.cardTitle}) : super(key: key);
+  const Activity({super.key, required this.mainIcon, required this.cardTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +11,8 @@ class Activity extends StatelessWidget {
       width: 70,
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: mainIcon,
-          ),
-          Text(
-            cardTitle,
-            textAlign: TextAlign.center,
-          ),
+          Padding(padding: const EdgeInsets.only(bottom: 8.0), child: mainIcon),
+          Text(cardTitle, textAlign: TextAlign.center),
         ],
       ),
     );

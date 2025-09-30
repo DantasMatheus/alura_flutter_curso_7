@@ -3,7 +3,7 @@ import 'package:estilizacao_componentes/themes/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class AccountStatus extends StatefulWidget {
-  const AccountStatus({Key? key}) : super(key: key);
+  const AccountStatus({super.key});
 
   @override
   State<AccountStatus> createState() => _AccountStatusState();
@@ -30,8 +30,9 @@ class _AccountStatusState extends State<AccountStatus> {
                       height: 10,
                       width: 10,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: ThemeColors.transactions['spent']),
+                        borderRadius: BorderRadius.circular(5),
+                        color: ThemeColors.transactions['spent'],
+                      ),
                     ),
                   ),
                   Column(
@@ -60,8 +61,9 @@ class _AccountStatusState extends State<AccountStatus> {
                       height: 10,
                       width: 10,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: ThemeColors.transactions['earned']),
+                        borderRadius: BorderRadius.circular(5),
+                        color: ThemeColors.transactions['earned'],
+                      ),
                     ),
                   ),
                   Column(
@@ -86,17 +88,20 @@ class _AccountStatusState extends State<AccountStatus> {
           ),
           const Padding(
             padding: EdgeInsets.only(top: 16.0, bottom: 8.0),
-            child: Text('Spending Limit: \$1000.00'), // desafio pode ser criar a função que limita deposito e transação baseado nesse limite. E TESTAR
+            child: Text(
+              'Spending Limit: \$1000.00',
+            ), // desafio pode ser criar a função que limita deposito e transação baseado nesse limite. E TESTAR
           ),
           Row(
             children: <Widget>[
               Expanded(
                 child: Container(
                   clipBehavior: Clip.hardEdge,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: LinearProgressIndicator(
-                    value: BankInherited.of(context).values.spent/1000,
+                    value: BankInherited.of(context).values.spent / 1000,
                     semanticsLabel: 'Current points',
                     minHeight: 8,
                   ),
@@ -118,16 +123,22 @@ class _AccountStatusState extends State<AccountStatus> {
                 'This month you spent ${spentAndEarned()} % of your money. Try to make it lower!',
               ),
               TextButton(
-                  onPressed: () => {}, child: const Text('Tell me more')),
+                onPressed: () => {},
+                child: const Text('Tell me more'),
+              ),
             ],
           ),
         ],
       ),
     );
   }
-  double spentAndEarned(){
-    double result = (BankInherited.of(context).values.spent/BankInherited.of(context).values.earned)*100;
-    if(result.isNaN) {
+
+  double spentAndEarned() {
+    double result =
+        (BankInherited.of(context).values.spent /
+            BankInherited.of(context).values.earned) *
+        100;
+    if (result.isNaN) {
       return 0;
     }
     return result;
