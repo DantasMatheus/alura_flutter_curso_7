@@ -10,9 +10,10 @@ import 'bank_http_test.mocks.dart';
 void main() {
   final MockBankHttp httpMock = MockBankHttp();
   testWidgets('My widget has a text "Spent" ', (tester) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => '5.37');
     await tester.pumpWidget(
       MaterialApp(
-        home: BankInherited(child: Home(api: MockBankHttp().dolarToReal())),
+        home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
     final spentFinder = find.text('Spent');
@@ -20,27 +21,30 @@ void main() {
   });
 
   testWidgets('finds a LinearProgressIndicator', (tester) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => '5.37');
     await tester.pumpWidget(
       MaterialApp(
-        home: BankInherited(child: Home(api: MockBankHttp().dolarToReal())),
+        home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });
 
   testWidgets('finds account status widget', (tester) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => '5.37');
     await tester.pumpWidget(
       MaterialApp(
-        home: BankInherited(child: Home(api: MockBankHttp().dolarToReal())),
+        home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
     expect(find.byKey(const Key('testKey')), findsOneWidget);
   });
 
   testWidgets('finds 5 boxcards', (tester) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => '5.37');
     await tester.pumpWidget(
       MaterialApp(
-        home: BankInherited(child: Home(api: MockBankHttp().dolarToReal())),
+        home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
     expect(
@@ -56,9 +60,10 @@ void main() {
   });
 
   testWidgets('When tap Deposit should uploade earned in 10', (tester) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => '5.37');
     await tester.pumpWidget(
       MaterialApp(
-        home: BankInherited(child: Home(api: MockBankHttp().dolarToReal())),
+        home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
     await tester.tap(find.text('Deposit'));
@@ -74,6 +79,6 @@ void main() {
         home: BankInherited(child: Home(api: httpMock.dolarToReal())),
       ),
     );
-    verify(httpMock.dolarToReal()).called(1);
+    verify(httpMock.dolarToReal()).called(6);
   });
 }
